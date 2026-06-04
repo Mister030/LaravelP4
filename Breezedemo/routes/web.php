@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TandartsController;
 use App\Http\Controllers\AssistentController;
 use App\Http\Controllers\MondhygienistController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PraktijkmanagementController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TandartsController;
 use Illuminate\Support\Facades\Route;
 
 // Welkomstpagina (als je niet bent ingelogd)
@@ -20,7 +20,7 @@ Route::get('/dashboard', function () {
 
 // Alle routes die beveiligd zijn met 'auth' (ingelogd zijn)
 Route::middleware('auth')->group(function () {
-    
+
     // Profiel routes (Breeze standaard)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -47,11 +47,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/patient', [PatientController::class, 'index'])
         ->name('patient.index')
         ->middleware('role:patient,praktijkmanagement');
-
-    // Praktijkmanagement Homepage (Alleen toegankelijk voor praktijkmanagement)
-    Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'index'])
-        ->name('praktijkmanagement.index')
-        ->middleware('role:praktijkmanagement');
 });
+
+Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'index'])
+    ->name('praktijkmanagement.index')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/userroles', [PraktijkmanagementController::class, 'manageUserroles'])
+    ->name('praktijkmanagement.userroles')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/{id}/edit', [PraktijkmanagementController::class, 'edit'])
+    ->name('praktijkmanagement.edit')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::put('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'update'])
+    ->name('praktijkmanagement.update')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::delete('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'destroy'])
+    ->name('praktijkmanagement.destroy')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'show'])
+    ->name('praktijkmanagement.show')
+    ->middleware(['auth', 'role:praktijkmanagement']);
 
 require __DIR__.'/auth.php';

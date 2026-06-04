@@ -33,14 +33,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'rolename' => ['required', 'string', 'max:255'], // <-- 1. VALIDEER DE GEBRUIKERSROL
+            // 'rolename' => ['required', 'string', 'max:20'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'rolename' => $request->rolename, // <-- 2. SLA DE GEBRUIKERSROL OP
+            'rolename' => 'patient',
             'password' => Hash::make($request->password),
         ]);
 

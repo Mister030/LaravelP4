@@ -9,11 +9,14 @@ class MondhygienistController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function index()
-{
-    $title = "Welkom op de pagina van de Mondhygiënist";
-    return view('Mondhygienist.index', compact('title'));
-}
+    public function index()
+    {
+        $title = 'Welkom op de pagina van de Mondhygiënist';
+
+        // Let op: hieronder moet exact de mapnaam staan die je in resources/views hebt gemaakt!
+        return view('Mondhygienist.index', compact('title'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

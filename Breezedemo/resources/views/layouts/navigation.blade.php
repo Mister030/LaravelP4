@@ -13,31 +13,35 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if(Auth::user()->rolename === 'tandarts' || Auth::user()->rolename === 'praktijkmanagement')
+                    @if(Auth::user()->rolename === 'tandarts')
                         <x-nav-link :href="route('tandarts.index')" :active="request()->routeIs('tandarts.index')">
                             {{ __('Tandarts Portaal') }}
                         </x-nav-link>
                     @endif
 
-                    @if(Auth::user()->rolename === 'assistent' || Auth::user()->rolename === 'praktijkmanagement')
+                    @if(Auth::user()->rolename === 'assistent')
                         <x-nav-link :href="route('assistent.index')" :active="request()->routeIs('assistent.index')">
                             {{ __('Assistent Portaal') }}
                         </x-nav-link>
                     @endif
 
-                    @if(Auth::user()->rolename === 'mondhygienist' || Auth::user()->rolename === 'praktijkmanagement')
+                    @if(Auth::user()->rolename === 'mondhygienist')
                         <x-nav-link :href="route('mondhygienist.index')" :active="request()->routeIs('mondhygienist.index')">
                             {{ __('Mondhygiënist Portaal') }}
                         </x-nav-link>
                     @endif
 
-                    @if(Auth::user()->rolename === 'patient' || Auth::user()->rolename === 'praktijkmanagement')
+                    @if(Auth::user()->rolename === 'patient')
                         <x-nav-link :href="route('patient.index')" :active="request()->routeIs('patient.index')">
                             {{ __('Patiënten Portaal') }}
                         </x-nav-link>
                     @endif
 
                     @if(Auth::user()->rolename === 'praktijkmanagement')
+                        <x-nav-link :href="route('praktijkmanagement.userroles')"
+                                    :active="request()->routeIs('praktijkmanagement.userroles')">
+                            {{ __('Gebruikersrollen') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('praktijkmanagement.index')" :active="request()->routeIs('praktijkmanagement.index')">
                             {{ __('Praktijkmanagement') }}
                         </x-nav-link>
@@ -106,10 +110,11 @@
                 </x-responsive-nav-link>
             @endif
 
-            @if(Auth::user()->rolename === 'mondhygienist' || Auth::user()->rolename === 'praktijkmanagement')
-                <x-responsive-nav-link :href="route('mondhygienist.index')" :active="request()->routeIs('mondhygienist.index')">
-                    {{ __('Mondhygiënist Portaal') }}
-                </x-responsive-nav-link>
+           @if(Auth::user()->rolename === 'mondhygienist' || Auth::user()->rolename === 'praktijkmanagement')
+    <x-nav-link :href="route('mondhygienist.index')" :active="request()->routeIs('mondhygienist.index')">
+        {{ __('Mondhygiënist Portaal') }}
+    </x-nav-link>
+@endifesponsive-nav-link>
             @endif
 
             @if(Auth::user()->rolename === 'patient' || Auth::user()->rolename === 'praktijkmanagement')

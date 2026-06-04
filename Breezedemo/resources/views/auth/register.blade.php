@@ -14,11 +14,11 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <x-input-label for="rolename" :value="__('Gebruikersrol')" />
             <x-text-input id="rolename" class="block mt-1 w-full" type="text" name="rolename" :value="old('rolename')" required />
             <x-input-error :messages="$errors->get('rolename')" class="mt-2" />
-        </div>
+        </div> --}}
 
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
